@@ -9,7 +9,7 @@ public class CameraPosition : MonoBehaviour {
     // Use this for initialization
     void Start () {
 
-        player = GameObject.Find("Player");
+        player = GameObject.Find("Spaceman");
 
 	}
 	
