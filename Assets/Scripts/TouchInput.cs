@@ -19,6 +19,9 @@ public class TouchInput : MonoBehaviour
         // Disables Built-in Gravity
         this.GetComponent<Rigidbody2D>().gravityScale = 0;
 
+        this.GetComponent<Rigidbody2D>().freezeRotation = true;
+
+
     }
 
     // Update is called once per frame
@@ -35,7 +38,7 @@ public class TouchInput : MonoBehaviour
             // If player touches the screen then player will jump
            // transform.Translate(Vector2.up * jumpForce);
 
-            this.GetComponent<Rigidbody2D>().AddForce(Vector2.up * jumpForce);
+            this.GetComponent<Rigidbody2D>().AddForce(transform.up * jumpForce);
 
             isJumping = false;
         }
@@ -47,11 +50,6 @@ public class TouchInput : MonoBehaviour
 
             this.GetComponent<Rigidbody2D>().AddForce(forwardForce * Vector2.right);
         }
-
-
-       // alignPlayer();
-       
-
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -59,35 +57,6 @@ public class TouchInput : MonoBehaviour
         if(collision.gameObject.name == "Cloudus 456")
         {
             isJumping = true;
-        }
-    }
-
-    void alignPlayer()
-    {
-        RaycastHit rayCastHit;
-
-        Ray ray = new Ray(transform.position, -transform.up);
-
-       // if(Physics.Raycast(transform.position,Vector3.down, out rayCastHit))
-        
-            if(Physics.Raycast(ray, out rayCastHit, 1 + .1f))
-            {
-               
-            if (rayCastHit.collider != null)
-            {
-                Vector3 pos = transform.position;
-
-                 pos.y = rayCastHit.point.y + rayCastHit.normal.y;
-
-                //transform.position = new Vector3(transform.position.x, pos.y, transform.position.z);
-
-                //playerVelocity = new Vector3(4.0f, pos.y);
-
-              
-
-            }
-
-
         }
     }
 }

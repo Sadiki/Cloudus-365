@@ -85,6 +85,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\CameraPosition.cs" />
+    <Compile Include="Assets\Scripts\GenerateObstacles.cs" />
     <Compile Include="Assets\Scripts\PlanetGravity.cs" />
     <Compile Include="Assets\Scripts\TouchInput.cs" />
   </ItemGroup>
