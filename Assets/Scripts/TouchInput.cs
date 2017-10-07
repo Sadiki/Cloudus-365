@@ -14,7 +14,7 @@ public class TouchInput : MonoBehaviour
     void Start()
     {
         forwardForce = 5;
-        jumpForce = 60;
+        jumpForce = 65;
 
         // Disables Built-in Gravity
         this.GetComponent<Rigidbody2D>().gravityScale = 0;
@@ -32,7 +32,13 @@ public class TouchInput : MonoBehaviour
        // this.GetComponent<Rigidbody2D>().AddForce(forwardForce * Vector2.right);
 
 
-        //(Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended && isJumping == true)
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended && isJumping == true)
+        {
+            this.GetComponent<Rigidbody2D>().AddForce(transform.up * jumpForce);
+
+            isJumping = false;
+        }
+
         if (Input.GetKey(KeyCode.W) && isJumping==true)
         {
             // If player touches the screen then player will jump
@@ -48,7 +54,7 @@ public class TouchInput : MonoBehaviour
             // transform.Translate(playerVelocity * Time.deltaTime);
 
 
-            this.GetComponent<Rigidbody2D>().AddForce(forwardForce * Vector2.right);
+          //  this.GetComponent<Rigidbody2D>().AddForce(forwardForce * Vector2.right);
         }
     }
 
