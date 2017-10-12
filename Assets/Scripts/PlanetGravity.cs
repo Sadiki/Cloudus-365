@@ -6,11 +6,8 @@ public class PlanetGravity : MonoBehaviour {
 
     float gravity = 48;
 
-    GameObject player;
-
 	// Use this for initialization
 	void Start () {
-        player = GameObject.Find("Spaceman");
 	}
 	
 	// Update is called once per frame
@@ -20,16 +17,36 @@ public class PlanetGravity : MonoBehaviour {
 
     void FixedUpdate()
     {
-        Vector3 gravityHeading = transform.position - player.transform.position;
-
-        Vector3 gravityDir = gravityHeading;
-        Vector3 gravityForce = gravityDir.normalized * gravity;
-
-
-        player.GetComponent<Rigidbody2D>().AddForce(gravityForce * Time.fixedDeltaTime);
-
-        // Keep player aligned to the down force
-        player.transform.rotation = Quaternion.FromToRotation(-player.transform.up, gravityHeading) * player.transform.rotation;
+        AttractObjects();
     }
+
+    void AttractObjects()
+    {
+        // Stores every object in an 100 point radius around the sphere
+        Collider2D[] allObjects = Physics2D.OverlapCircleAll(this.transform.position, 100f);
+
+
+        // Loops through all the objects and rotates all of them to their down force.
+        for(int i = 0; i < allObjects.Length; i++)
+        {
+            // Calculates direction of the force
+            Vector3 gravityDir = transform.position - allObjects[i].transform.position;
+
+            Vector3 gravityForce = gravityDir.normalized * gravity;
+
+            // If the object has a rigid body then apply force downward (So just the player)
+            if (allObjects[i].GetComponent<Rigidbody2D>() != null)
+            {
+                allObjects[i].GetComponent<Rigidbody2D>().AddForce(gravityForce * Time.fixedDeltaTime);
+            }
+
+            // Keeps the objects aligned to the down force
+            allObjects[i].transform.rotation = Quaternion.FromToRotation(-allObjects[i].transform.up, gravityDir) * allObjects[i].transform.rotation;
+        }
+
+
+    }
+
+
 
 }

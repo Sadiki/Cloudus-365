@@ -4,21 +4,17 @@ using UnityEngine;
 
 public class TouchInput : MonoBehaviour
 {
-    float forwardForce;
     float jumpForce;
     bool isJumping = true;
-
-    Rigidbody2D player;
 
     // Use this for initialization
     void Start()
     {
-        forwardForce = 5;
         jumpForce = 65;
 
-        // Disables Built-in Gravity
+        // Disables Built-in Gravity on player
         this.GetComponent<Rigidbody2D>().gravityScale = 0;
-
+        // Disables Built-in Rotation on player
         this.GetComponent<Rigidbody2D>().freezeRotation = true;
 
 
@@ -27,11 +23,10 @@ public class TouchInput : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        // Moves the player to the right.
         transform.Translate(Vector2.right * Time.deltaTime * 3);
-       // this.GetComponent<Rigidbody2D>().AddForce(forwardForce * Vector2.right);
 
-
+        // If the player has touched and released the screen and the they are on the ground then the player jumps.
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended && isJumping == true)
         {
             this.GetComponent<Rigidbody2D>().AddForce(transform.up * jumpForce);
@@ -39,25 +34,16 @@ public class TouchInput : MonoBehaviour
             isJumping = false;
         }
 
+        // For testing through computer.
         if (Input.GetKey(KeyCode.W) && isJumping==true)
         {
-            // If player touches the screen then player will jump
-           // transform.Translate(Vector2.up * jumpForce);
-
             this.GetComponent<Rigidbody2D>().AddForce(transform.up * jumpForce);
 
             isJumping = false;
         }
-
-        if (Input.GetKey(KeyCode.D))
-        {
-            // transform.Translate(playerVelocity * Time.deltaTime);
-
-
-          //  this.GetComponent<Rigidbody2D>().AddForce(forwardForce * Vector2.right);
-        }
     }
 
+    // When the player has touched the floor then they are able to jump again.
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.name == "Cloudus 456")

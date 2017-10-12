@@ -4,46 +4,51 @@ using UnityEngine;
 
 public class GenerateObstacles : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
+
+    // Use this for initialization
+    void Start () {
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
 
+       // CalculateCreationPoint();
+
+    }
+
+    /*
+     * Uses Raycasting to calculate a position on the ground 10 points to the player's x.
+     */
+     Vector2 CalculateHitPoint()
+    {
+        Vector2 aboveGroundPoint = new Vector2(this.GetComponent<Rigidbody2D>().position.x + 10, this.GetComponent<Rigidbody2D>().position.y);
+
+        RaycastHit2D hit2D = Physics2D.Raycast(aboveGroundPoint, Vector2.down);
+
+        if(hit2D.collider != null)
+        {
+            return hit2D.point;
+        }else
+        {
+            return Vector2.down;
+        }
+
+    }
+
+    /*
+     * Temporary way to create an object
+     */
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.name == "level1")
         {
-            //  GameObject gmeObjObstacle1 = new GameObject("Obstacle1");
+            // Create gameobject in the scene from the SmallRock prefab
+            GameObject obstacle1 = GameObject.Instantiate(Resources.Load("SmallRock")) as GameObject;
 
-            //  SpriteRenderer obstacle1 = gmeObjObstacle1.AddComponent<SpriteRenderer>();
-
-            //  obstacle1.sprite = Resources.Load("Images", typeof(Sprite)) as Sprite;
-
-            GameObject obstacle1 = GameObject.Instantiate(Resources.Load("Obstacle1")) as GameObject;
-
-            obstacle1.transform.position = new Vector2(11.15f, 24.23f);
-
-            obstacle1.transform.localEulerAngles = new Vector3(0, 0, -24.423f);
-
-            GameObject obstacle2 = GameObject.Instantiate(Resources.Load("Obstacle1")) as GameObject;
-
-            obstacle2.transform.position = new Vector2(16.048f, 20.991f);
-
-            obstacle2.transform.localEulerAngles = new Vector3(0, 0, -45.163f);
-
-            GameObject obstacle3 = GameObject.Instantiate(Resources.Load("Obstacle1")) as GameObject;
-
-            obstacle3.transform.position = new Vector2(19.741f, 14.752f);
-
-            obstacle3.transform.localEulerAngles = new Vector3(0, 0, -72.65f);
-            // new Quaternion(0, 0, -192.836f, testObj.transform.rotation.w);
-
-            //  Instantiate(obstacle1, new Vector2(8.476f, 25.295f), new Quaternion(0, 0, -192.836f, this.transform.rotation.w));
+            // Gets the position of the object.
+            Vector2 creationPoint = CalculateHitPoint();
+            obstacle1.transform.position = new Vector2(creationPoint.x + 1, creationPoint.y);
         }
 
         if (collision.gameObject.name == "Level2")
