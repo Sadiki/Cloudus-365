@@ -10,7 +10,7 @@ public class TouchInput : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        jumpForce = 65;
+        jumpForce = 150;
 
         // Disables Built-in Gravity on player
         this.GetComponent<Rigidbody2D>().gravityScale = 0;
@@ -24,7 +24,7 @@ public class TouchInput : MonoBehaviour
     void Update()
     {
         // Moves the player to the right.
-        transform.Translate(Vector2.right * Time.deltaTime * 3);
+        transform.Translate(Vector2.right * Time.deltaTime * 2);
 
         // If the player has touched and released the screen and the they are on the ground then the player jumps.
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended && isJumping == true)
