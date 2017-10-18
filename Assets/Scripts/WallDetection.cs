@@ -24,16 +24,16 @@ public class WallDetection : MonoBehaviour {
         if(objDetected.gameObject.name == "Spaceman")
         {
 
-            if(Time.time > waitTime)
+            if (Time.time > waitTime)
             {
-            if (playerScript.IsInPerimeter == false)
-            {
-                playerScript.IsInPerimeter = true;
+                if (playerScript.IsInPerimeter == false)
+                {
+                    playerScript.IsInPerimeter = true;
 
-                waitTime = Time.time + 2.2f;
-            }
-            }
+                    waitTime = Time.time + 2.2f;
+                }
 
+            }
         }
     }
 }
