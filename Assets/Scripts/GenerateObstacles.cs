@@ -44,7 +44,7 @@ public class GenerateObstacles : MonoBehaviour {
         if (collision.gameObject.name == "level1")
         {
             // Create gameobject in the scene from the SmallRock prefab
-            GameObject obstacle1 = GameObject.Instantiate(Resources.Load("SmallRock")) as GameObject;
+            GameObject obstacle1 = GameObject.Instantiate(Resources.Load("Obstacles/SmallRock")) as GameObject;
 
             // Gets the position of the object.
             Vector2 creationPoint = CalculateHitPoint();
