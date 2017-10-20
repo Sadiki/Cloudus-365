@@ -6,6 +6,8 @@ TagManager:
   tags:
   - bg1
   - bg0
+  - smallOb
+  - bigOb
   layers:
   - Default
   - TransparentFX

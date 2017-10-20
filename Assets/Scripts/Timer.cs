@@ -8,6 +8,15 @@ public class Timer : MonoBehaviour {
     Text timer;
     float time = 0;
   //  GameObject player;
+
+    public float GetTime
+    {
+        get
+        {
+            return time;
+        }
+    }
+    
     // Use this for initialization
     void Start () {
         //player = GameObject.Find("Spaceman");

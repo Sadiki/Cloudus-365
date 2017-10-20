@@ -10,6 +10,13 @@ public class bgGenerater : MonoBehaviour {
     private float finalAngle;
     private int randomArea;
     private int layerNum;
+
+    private int nextArea;
+
+    public int NextArea()
+    {
+        return nextArea;
+    }
     // Use this for initialization
     void Start () {
 
@@ -58,9 +65,23 @@ public class bgGenerater : MonoBehaviour {
 
     private void GenerateBackground()
     {
+        nextArea = randomArea;
+        GameObject.Find("Cloudus 456").GetComponent<obstacleGenerator>().ChangedArea(nextArea);
         while (currentAngle < finalAngle)
         {
-            if (Random.value > .65)   // random place or not
+            float placeRandom = 0;
+            if (nextArea >= 14)
+            {
+                placeRandom = 0.7f;
+            }
+            else if (nextArea >= 8)
+            {
+                placeRandom = 0.3f;
+            }else
+            {
+                placeRandom = 0.2f;
+            }
+            if (Random.value > placeRandom)   // random place or not
             {
                 print("Create OBJ");
                 //x = cos(a) * r;
@@ -113,5 +134,6 @@ public class bgGenerater : MonoBehaviour {
 
         return newSprite[randomSprite];
     }
+    
 
 }

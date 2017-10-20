@@ -37,7 +37,7 @@ public class Health : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.name != "topTrigger")
+        if (collision.gameObject.tag == "smallOb" || collision.gameObject.tag == "bigOb")
         {
             if (healthVar > 0)
             {

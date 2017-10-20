@@ -43,6 +43,7 @@ public class WallDetection : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+       // print("collision with wall" + collision.name);
         playerScript.IsInPerimeter = false;
     }
 }

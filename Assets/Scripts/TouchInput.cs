@@ -79,7 +79,7 @@ public class TouchInput : MonoBehaviour
                 {
                     isMovingLeft = true;
                 }
-
+                GameObject.Find("Cloudus 456").GetComponent<obstacleGenerator>().ChangeDirection(isMovingLeft);
 
                 isPerimeter = false;
             }
@@ -103,8 +103,7 @@ public class TouchInput : MonoBehaviour
                 {
                     isMovingLeft = true;
                 }
-
-
+                GameObject.Find("Cloudus 456").GetComponent<obstacleGenerator>().ChangeDirection(isMovingLeft);
                 isPerimeter = false;
             }
         }

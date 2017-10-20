@@ -19,7 +19,6 @@ public class PlanetGravity : MonoBehaviour {
     {
         AttractObjects();
     }
-
     void AttractObjects()
     {
         // Stores every object in an 100 point radius around the sphere
