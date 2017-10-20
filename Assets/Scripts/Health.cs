@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Health : MonoBehaviour {
@@ -12,10 +13,25 @@ public class Health : MonoBehaviour {
 
     float waitTime = 0.0f;
 
+    bool isInvul = false;
+
+    public Button playAgainButton;
+    public Button exitButton;
+    public GameObject deathPopup;
+
+    bool isGameOver = false;
+
+
     // Use this for initialization
     void Start () {
-      //  GameObject healthObj = GameObject.Find("Health");
-       // healthTxt.text = healthObj.GetComponent<Text>().text;
+
+        Button playAgainBtn = playAgainButton.GetComponent<Button>();
+        playAgainBtn.onClick.AddListener(PlayAgain);
+
+        Button exitBtn = exitButton.GetComponent<Button>();
+        exitBtn.onClick.AddListener(ExitGame);
+
+        deathPopup.SetActive(false);
     }
 	
 	// Update is called once per frame
@@ -30,16 +46,24 @@ public class Health : MonoBehaviour {
                 alphaChange.a = 1f;
 
                 this.GetComponent<SpriteRenderer>().color = alphaChange;
+
+                
+                isInvul = false;
             }
+        }
+
+        if(isGameOver == true)
+        {
+            Time.timeScale = 0;
         }
 		
 	}
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "smallOb" || collision.gameObject.tag == "bigOb")
+        if (collision.gameObject.tag == "smallOb" || collision.gameObject.tag == "bigOb" || collision.gameObject.tag == "bg1")
         {
-            if (healthVar > 0)
+            if (healthVar > 1 && isInvul == false)
             {
                 // Change Health Var
                 healthVar--;
@@ -54,12 +78,32 @@ public class Health : MonoBehaviour {
 
                 isTransperant = true;
 
+                isInvul = true;
                 waitTime = Time.time + 1.5f;
             }
             else
             {
                 // Death Screen
+                isGameOver = true;
+                deathPopup.SetActive(true);
+
             }
+        }
+
+    }
+
+    void PlayAgain()
+    {
+        if (deathPopup.activeSelf == true)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+    }
+    void ExitGame()
+    {
+        if (deathPopup.activeSelf == true)
+        {
+            Application.Quit();
         }
     }
 }

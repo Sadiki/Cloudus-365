@@ -107,6 +107,11 @@ public class TouchInput : MonoBehaviour
                 isPerimeter = false;
             }
         }
+
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
     }
 
     // When the player has touched the floor then they are able to jump again.
