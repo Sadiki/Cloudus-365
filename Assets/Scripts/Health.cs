@@ -7,8 +7,8 @@ using UnityEngine.UI;
 public class Health : MonoBehaviour {
 
     public Text healthTxt;
-    int healthVar = 3;
-
+    int healthVar;
+    int maxHealth = 3;
     bool isTransperant = false;
 
     float waitTime = 0.0f;
@@ -21,6 +21,8 @@ public class Health : MonoBehaviour {
 
     bool isGameOver = false;
 
+    public GameObject healthBar;
+
 
     // Use this for initialization
     void Start () {
@@ -32,10 +34,12 @@ public class Health : MonoBehaviour {
         exitBtn.onClick.AddListener(ExitGame);
 
         deathPopup.SetActive(false);
+        healthVar = maxHealth;
+
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update () {
         if (isTransperant)
         {
             if (Time.time > waitTime)
@@ -68,7 +72,7 @@ public class Health : MonoBehaviour {
                 // Change Health Var
                 healthVar--;
                 healthTxt.text = "Health: " + healthVar;
-
+                ChangedHealth();
                 // Change alpha of sprite
                 Color alphaChange = this.GetComponent<SpriteRenderer>().color;
 
@@ -84,6 +88,9 @@ public class Health : MonoBehaviour {
             else
             {
                 // Death Screen
+                healthVar--;
+                healthTxt.text = "Health: " + healthVar;
+                ChangedHealth();
                 isGameOver = true;
                 deathPopup.SetActive(true);
 
@@ -105,5 +112,12 @@ public class Health : MonoBehaviour {
         {
             Application.Quit();
         }
+    }
+
+    void ChangedHealth()
+    {
+
+        Vector2 newScale = new Vector2((healthBar.transform.localScale.x/maxHealth)* healthVar, healthBar.transform.localScale.y);
+        healthBar.transform.localScale = newScale;
     }
 }

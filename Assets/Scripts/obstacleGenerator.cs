@@ -42,7 +42,7 @@ public class obstacleGenerator : MonoBehaviour {
         changedArea = false;
         placeWall = false;
         isMovingLeft = false;
-        wallSpowningTime = 50;
+        wallSpowningTime = 10;
     }
 
     // Update is called once per frame
@@ -109,14 +109,14 @@ public class obstacleGenerator : MonoBehaviour {
         {
             if(timInt% wallSpowningTime == 0)
             {
-                placeWall = true;
-                print("wall");
+               // placeWall = true;
+                print("wall1");
             }
         }
         else if(timInt == wallSpowningTime)
         {
-            placeWall = true;
-            print("wall");
+           // placeWall = true;
+            print("wall2");
 
         }
         print("Timer in int " + (int)timer );
