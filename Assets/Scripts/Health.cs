@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class Health : MonoBehaviour {
 
-    public Text healthTxt;
     int healthVar;
     int maxHealth = 3;
     bool isTransperant = false;
@@ -71,7 +70,6 @@ public class Health : MonoBehaviour {
             {
                 // Change Health Var
                 healthVar--;
-                healthTxt.text = "Health: " + healthVar;
                 ChangedHealth();
                 // Change alpha of sprite
                 Color alphaChange = this.GetComponent<SpriteRenderer>().color;
@@ -89,7 +87,6 @@ public class Health : MonoBehaviour {
             {
                 // Death Screen
                 healthVar--;
-                healthTxt.text = "Health: " + healthVar;
                 ChangedHealth();
                 isGameOver = true;
                 deathPopup.SetActive(true);
