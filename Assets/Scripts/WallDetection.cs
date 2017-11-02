@@ -33,7 +33,7 @@ public class WallDetection : MonoBehaviour {
                 {
                     playerScript.IsInPerimeter = true;
 
-                    waitTime = Time.time + 3.2f;
+                    waitTime = Time.time + 4.2f;
                 }
 
             }

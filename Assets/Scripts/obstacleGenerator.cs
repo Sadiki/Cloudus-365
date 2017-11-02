@@ -25,6 +25,8 @@ public class obstacleGenerator : MonoBehaviour {
 
     private bool isMovingLeft;
 
+    public AudioClip collideSound;
+
     // Use this for initialization
     void Start()
     {
@@ -217,4 +219,13 @@ public class obstacleGenerator : MonoBehaviour {
     {
         isMovingLeft = isMovingLeftSide;
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.name == "Spaceman")
+        {
+            GetComponent<AudioSource>().PlayOneShot(collideSound);
+        }
+    }
+
 }

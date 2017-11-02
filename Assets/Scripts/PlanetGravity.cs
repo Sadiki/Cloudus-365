@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class PlanetGravity : MonoBehaviour {
 
-    float gravity = 130;
+    float gravity = 6;
 
-	// Use this for initialization
-	void Start () {
-	}
+    GameObject player;
+    TouchInput playerInput;
+
+    // Use this for initialization
+    void Start () {
+
+        player = GameObject.Find("Spaceman");
+        playerInput = player.GetComponent<TouchInput>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -19,6 +25,7 @@ public class PlanetGravity : MonoBehaviour {
     {
         AttractObjects();
     }
+
     void AttractObjects()
     {
         // Stores every object in an 100 point radius around the sphere
@@ -31,12 +38,13 @@ public class PlanetGravity : MonoBehaviour {
             // Calculates direction of the force
             Vector3 gravityDir = transform.position - allObjects[i].transform.position;
 
+            
             Vector3 gravityForce = gravityDir.normalized * gravity;
 
             // If the object has a rigid body then apply force downward (So just the player)
             if (allObjects[i].GetComponent<Rigidbody2D>() != null)
             {
-                allObjects[i].GetComponent<Rigidbody2D>().AddForce(gravityForce * Time.fixedDeltaTime);
+                 allObjects[i].GetComponent<Rigidbody2D>().AddForce(gravityForce );
             }
 
             // Keeps the objects aligned to the down force
@@ -45,7 +53,5 @@ public class PlanetGravity : MonoBehaviour {
 
 
     }
-
-
 
 }
