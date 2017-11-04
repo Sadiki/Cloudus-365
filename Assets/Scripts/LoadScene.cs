@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LoadScene : MonoBehaviour {
 
@@ -16,6 +17,11 @@ public class LoadScene : MonoBehaviour {
 
     public void LoadGame()
     {
-        Application.LoadLevel("Stage 1");
+        SceneManager.LoadScene("Stage 1");
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
     }
 }

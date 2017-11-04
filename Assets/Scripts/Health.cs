@@ -109,6 +109,7 @@ public class Health : MonoBehaviour {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
+
     void ExitGame()
     {
         if (deathPopup.activeSelf == true)

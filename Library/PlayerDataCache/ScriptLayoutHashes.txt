@@ -113,7 +113,7 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.VR.WSA.Spa
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.PlanetGravity
 d682e193ee587e6ae62e5aa816be6d11 Assembly-CSharp.dll:.Health
 2e5bcd5256036b05070093ebe7acd46c Assembly-CSharp.dll:.TouchInput
-bc50099a7224e538dc07e0f43abbd911 Assembly-CSharp.dll:.Popup
+dc1051992cc82d89f8daaf128f66ddb5 Assembly-CSharp.dll:.Popup
 7a75edc83a9f267c790ac1425865847a Assembly-CSharp.dll:.bgGenerater
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.CameraPosition
 fc1e0f4d8439d9928083474691511a13 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator

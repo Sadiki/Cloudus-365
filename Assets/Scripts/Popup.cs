@@ -7,6 +7,7 @@ public class Popup : MonoBehaviour {
 
     public Button pauseButton;
     public Button contButton;
+    public Button exitButton;
     public GameObject pausePopup;
 
     bool paused = false;
@@ -19,6 +20,9 @@ public class Popup : MonoBehaviour {
 
         Button contBtn = contButton.GetComponent<Button>();
         contBtn.onClick.AddListener(Continue);
+
+        Button exitBtn = exitButton.GetComponent<Button>();
+        exitBtn.onClick.AddListener(ExitGame);
 
         pausePopup.SetActive(false);
     }
@@ -34,7 +38,7 @@ public class Popup : MonoBehaviour {
         }
     }
 
-    void Pause()
+    public void Pause()
     {
         if(pausePopup.activeSelf == false)
         {
@@ -48,6 +52,14 @@ public class Popup : MonoBehaviour {
         {
             pausePopup.SetActive(false);
             Paused = false;
+        }
+    }
+
+    void ExitGame()
+    {
+        if (pausePopup.activeSelf == true)
+        {
+            Application.Quit();
         }
     }
 

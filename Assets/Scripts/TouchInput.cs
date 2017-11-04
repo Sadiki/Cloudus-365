@@ -146,7 +146,7 @@ public class TouchInput : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Escape))
         {
-            Application.Quit();
+            pausePopup.Pause();
         }
     }
 
