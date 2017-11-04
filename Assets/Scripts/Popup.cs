@@ -25,7 +25,7 @@ public class Popup : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-        if (paused == false) {
+        if (Paused == false) {
             Time.timeScale = 1;
         }
 
@@ -39,7 +39,7 @@ public class Popup : MonoBehaviour {
         if(pausePopup.activeSelf == false)
         {
             pausePopup.SetActive(true);
-            paused = true;
+            Paused = true;
         }
     }
     void Continue()
@@ -47,7 +47,21 @@ public class Popup : MonoBehaviour {
         if(pausePopup.activeSelf == true)
         {
             pausePopup.SetActive(false);
-            paused = false;
+            Paused = false;
         }
     }
+
+    public bool Paused
+    {
+        get
+        {
+            return paused;
+        }
+
+        set
+        {
+            paused = value;
+        }
+    }
+
 }

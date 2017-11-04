@@ -15,6 +15,10 @@ public class TouchInput : MonoBehaviour
 
     float numJumps = 0;
 
+    public AudioClip jumpSound;
+
+    Popup pausePopup;
+
     // Use this for initialization
     void Start()
     {
@@ -25,6 +29,8 @@ public class TouchInput : MonoBehaviour
         // Disables Built-in Rotation on player
         this.GetComponent<Rigidbody2D>().freezeRotation = true;
 
+        GameObject popupController = GameObject.Find("PopupController");
+        pausePopup = popupController.GetComponent<Popup>();
 
     }
 
@@ -65,59 +71,76 @@ public class TouchInput : MonoBehaviour
         // If the player has touched and released the screen and the they are on the ground then the player jumps.
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended && IsJumping == false)
         {
-            if (isPerimeter == false)
+            if (!(pausePopup.Paused))
             {
-                this.GetComponent<Rigidbody2D>().AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
-
-                IsJumping = true;
-
-            }
-            else
-            {
-                if (isMovingLeft == true)
+                if (isPerimeter == false)
                 {
-                    isMovingLeft = false;
+
+                    numJumps++;
+
+                    if (numJumps == 2)
+                    {
+                        this.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                    }
+                    this.GetComponent<Rigidbody2D>().AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
+
+                    if (numJumps >= 2)
+                    {
+                        IsJumping = true;
+                    }
+                    GetComponent<AudioSource>().PlayOneShot(jumpSound, 1);
                 }
                 else
                 {
-                    isMovingLeft = true;
+                    if (isMovingLeft == true)
+                    {
+                        isMovingLeft = false;
+                    }
+                    else
+                    {
+                        isMovingLeft = true;
+                    }
+                    GameObject.Find("Cloudus 456").GetComponent<obstacleGenerator>().ChangeDirection(isMovingLeft);
+                    isPerimeter = false;
                 }
-                GameObject.Find("Cloudus 456").GetComponent<obstacleGenerator>().ChangeDirection(isMovingLeft);
-
-                isPerimeter = false;
             }
         }
 
         // For testing through computer.
         if (Input.GetKeyUp(KeyCode.W) && IsJumping == false)
         {
-            if (isPerimeter == false)
+            if (!(pausePopup.Paused))
             {
-                numJumps++;
+                if (isPerimeter == false)
+                {
 
-                if(numJumps == 2)
-                {
-                    this.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-                }
-                this.GetComponent<Rigidbody2D>().AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
+                    numJumps++;
 
-                if (numJumps >= 2)
-                {
-                    IsJumping = true;
-                }
-            }
-            else
-            {
-                if (isMovingLeft == true)
-                {
-                    isMovingLeft = false;
+                    if (numJumps == 2)
+                    {
+                        this.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                    }
+                    this.GetComponent<Rigidbody2D>().AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
+
+                    if (numJumps >= 2)
+                    {
+                        IsJumping = true;
+                    }
+                    GetComponent<AudioSource>().PlayOneShot(jumpSound, 1);
                 }
                 else
                 {
-                    isMovingLeft = true;
+                    if (isMovingLeft == true)
+                    {
+                        isMovingLeft = false;
+                    }
+                    else
+                    {
+                        isMovingLeft = true;
+                    }
+                    GameObject.Find("Cloudus 456").GetComponent<obstacleGenerator>().ChangeDirection(isMovingLeft);
+                    isPerimeter = false;
                 }
-                GameObject.Find("Cloudus 456").GetComponent<obstacleGenerator>().ChangeDirection(isMovingLeft);
-                isPerimeter = false;
             }
         }
 

@@ -22,6 +22,9 @@ public class Health : MonoBehaviour {
 
     public GameObject healthBar;
 
+    public AudioClip hurtSound;
+
+    Popup pausePopup;
 
     // Use this for initialization
     void Start () {
@@ -35,6 +38,8 @@ public class Health : MonoBehaviour {
         deathPopup.SetActive(false);
         healthVar = maxHealth;
 
+        GameObject popupController = GameObject.Find("PopupController");
+        pausePopup = popupController.GetComponent<Popup>();
     }
 
     // Update is called once per frame
@@ -82,6 +87,7 @@ public class Health : MonoBehaviour {
 
                 isInvul = true;
                 waitTime = Time.time + 1.5f;
+                GetComponent<AudioSource>().PlayOneShot(hurtSound);
             }
             else
             {
@@ -90,7 +96,7 @@ public class Health : MonoBehaviour {
                 ChangedHealth();
                 isGameOver = true;
                 deathPopup.SetActive(true);
-
+                pausePopup.Paused = true;
             }
         }
 
