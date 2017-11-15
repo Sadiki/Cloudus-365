@@ -44,7 +44,7 @@ public class obstacleGenerator : MonoBehaviour {
         changedArea = false;
         placeWall = false;
         isMovingLeft = false;
-        wallSpowningTime = 10;
+        wallSpowningTime = 50;
     }
 
     // Update is called once per frame
@@ -64,7 +64,7 @@ public class obstacleGenerator : MonoBehaviour {
             playerAngle = 180 + (180 - tempAngle);
         }
 
-        print("player angle " + playerAngle);
+       // print("player angle " + playerAngle);
 
         if (isMovingLeft == false)
         {
@@ -83,7 +83,7 @@ public class obstacleGenerator : MonoBehaviour {
             }
         }
         //print("PlayerAngle " + playerAngle);
-        print("obstacleAngle " + obstacleAngle);
+       // print("obstacleAngle " + obstacleAngle);
 
         //print("timer" + timer);
         if (timer >= nextSpownTime)
@@ -94,11 +94,11 @@ public class obstacleGenerator : MonoBehaviour {
             GenerateObstcale();
             ResetSpownTime();
         }
-        print("Current type " + currentArea + " Next type: " + nextArea);
+        //print("Current type " + currentArea + " Next type: " + nextArea);
 
         if ((playerAngle >=175 && playerAngle <= 185)|| (playerAngle >= 345 && playerAngle <= 355)){
             // change current type
-            print("Current type " + currentArea + " Next type: " + nextArea);
+            //print("Current type " + currentArea + " Next type: " + nextArea);
             if(currentArea != nextArea) 
             {
                 currentArea = nextArea;
@@ -109,19 +109,19 @@ public class obstacleGenerator : MonoBehaviour {
 
         if(timInt > wallSpowningTime)
         {
-            if(timInt% wallSpowningTime == 0)
+            if(timInt% wallSpowningTime == 0 && placeWall == false)
             {
-               // placeWall = true;
-                print("wall1");
+                placeWall = true;
+                //print("wall1");
             }
         }
-        else if(timInt == wallSpowningTime)
+        else if(timInt == wallSpowningTime && placeWall == false)
         {
-           // placeWall = true;
-            print("wall2");
+            placeWall = true;
+           // print("wall2");
 
         }
-        print("Timer in int " + (int)timer );
+        //print("Timer in int " + (int)timer );
 
 
         
@@ -154,12 +154,12 @@ public class obstacleGenerator : MonoBehaviour {
 
     private void GenerateObstcale()
     {
-        print("Generate at " + obstacleAngle);
+       // print("Generate at " + obstacleAngle);
 
         Vector2 pos = new Vector2(Mathf.Cos(obstacleAngle * Mathf.Deg2Rad)*15, Mathf.Sin(obstacleAngle * Mathf.Deg2Rad) * 15);
         GameObject ob = GameObject.Instantiate(RandomSprite(currentArea)) as GameObject;
         ob.transform.position = new Vector2(-pos.x, pos.y);
-        print("Position at " + ob.transform.position);
+       // print("Position at " + ob.transform.position);
 
     }
 
@@ -172,7 +172,10 @@ public class obstacleGenerator : MonoBehaviour {
             newSprite = Resources.Load<GameObject>("Obstacles/wall");
 
             placeWall = false;
-        }else
+
+
+        }
+        else
         {
 
             string areaName = "";

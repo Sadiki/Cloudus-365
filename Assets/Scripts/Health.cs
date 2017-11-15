@@ -8,6 +8,7 @@ public class Health : MonoBehaviour {
 
     int healthVar;
     int maxHealth = 3;
+    float healthbarMaxSize;
     bool isTransperant = false;
 
     float waitTime = 0.0f;
@@ -40,6 +41,8 @@ public class Health : MonoBehaviour {
 
         GameObject popupController = GameObject.Find("PopupController");
         pausePopup = popupController.GetComponent<Popup>();
+
+        healthbarMaxSize = healthBar.transform.localScale.x;
     }
 
     // Update is called once per frame
@@ -121,7 +124,9 @@ public class Health : MonoBehaviour {
     void ChangedHealth()
     {
 
-        Vector2 newScale = new Vector2((healthBar.transform.localScale.x/maxHealth)* healthVar, healthBar.transform.localScale.y);
+         Vector2 newScale = new Vector2((healthbarMaxSize/maxHealth)* healthVar, healthBar.transform.localScale.y);
+        // Vector2 newScale = new Vector2(healthVar / maxHealth , healthBar.transform.localScale.y);
+
         healthBar.transform.localScale = newScale;
     }
 }
