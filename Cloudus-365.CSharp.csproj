@@ -87,15 +87,18 @@
     <Compile Include="Assets\Scripts\bgGenerater.cs" />
     <Compile Include="Assets\Scripts\CameraPosition.cs" />
     <Compile Include="Assets\Scripts\DestroyOffScreen.cs" />
-    <Compile Include="Assets\Scripts\GenerateObstacles.cs" />
     <Compile Include="Assets\Scripts\Health.cs" />
     <Compile Include="Assets\Scripts\LoadScene.cs" />
+    <Compile Include="Assets\Scripts\NewBehaviourScript.cs" />
     <Compile Include="Assets\Scripts\obstacleGenerator.cs" />
     <Compile Include="Assets\Scripts\PlanetGravity.cs" />
     <Compile Include="Assets\Scripts\Popup.cs" />
     <Compile Include="Assets\Scripts\Timer.cs" />
     <Compile Include="Assets\Scripts\TouchInput.cs" />
     <Compile Include="Assets\Scripts\WallDetection.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Images\Font\moon-flower\readme.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>

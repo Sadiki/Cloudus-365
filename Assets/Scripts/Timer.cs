@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Timer : MonoBehaviour {
 
     Text timer;
-    float time = 0;
+    public float time = 0;
   //  GameObject player;
 
     public float GetTime
@@ -14,6 +14,10 @@ public class Timer : MonoBehaviour {
         get
         {
             return time;
+        }
+        set
+        {
+            time = value;
         }
     }
     

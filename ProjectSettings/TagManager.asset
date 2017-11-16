@@ -8,6 +8,8 @@ TagManager:
   - bg0
   - smallOb
   - bigOb
+  - score
+  - best
   layers:
   - Default
   - TransparentFX

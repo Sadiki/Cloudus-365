@@ -15,32 +15,15 @@ public class Health : MonoBehaviour {
 
     bool isInvul = false;
 
-    public Button playAgainButton;
-    public Button exitButton;
-    public GameObject deathPopup;
-
-    bool isGameOver = false;
+    public bool isGameOver = false;
 
     public GameObject healthBar;
 
     public AudioClip hurtSound;
 
-    Popup pausePopup;
-
     // Use this for initialization
     void Start () {
-
-        Button playAgainBtn = playAgainButton.GetComponent<Button>();
-        playAgainBtn.onClick.AddListener(PlayAgain);
-
-        Button exitBtn = exitButton.GetComponent<Button>();
-        exitBtn.onClick.AddListener(ExitGame);
-
-        deathPopup.SetActive(false);
         healthVar = maxHealth;
-
-        GameObject popupController = GameObject.Find("PopupController");
-        pausePopup = popupController.GetComponent<Popup>();
 
         healthbarMaxSize = healthBar.transform.localScale.x;
     }
@@ -62,12 +45,6 @@ public class Health : MonoBehaviour {
                 isInvul = false;
             }
         }
-
-        if(isGameOver == true)
-        {
-            Time.timeScale = 0;
-        }
-		
 	}
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -98,29 +75,11 @@ public class Health : MonoBehaviour {
                 healthVar--;
                 ChangedHealth();
                 isGameOver = true;
-                deathPopup.SetActive(true);
-                pausePopup.Paused = true;
             }
         }
 
     }
-
-    void PlayAgain()
-    {
-        if (deathPopup.activeSelf == true)
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
-    }
-
-    void ExitGame()
-    {
-        if (deathPopup.activeSelf == true)
-        {
-            Application.Quit();
-        }
-    }
-
+   
     void ChangedHealth()
     {
 
@@ -128,5 +87,16 @@ public class Health : MonoBehaviour {
         // Vector2 newScale = new Vector2(healthVar / maxHealth , healthBar.transform.localScale.y);
 
         healthBar.transform.localScale = newScale;
+    }
+    public bool Over
+    {
+        get
+        {
+            return isGameOver;
+        }
+        set
+        {
+            isGameOver = value;
+        }
     }
 }
