@@ -34,6 +34,21 @@ public class Popup : MonoBehaviour {
     float _score;
     static int _best;
 
+    // Tutorial Variables
+    public GameObject avoidObstaclePopup;
+    public GameObject WOncePopup;
+    public GameObject WTwicePopup;
+    public GameObject tapOncePopup;
+    public GameObject tapTwicePopup;
+    bool runOnce = false;
+    GameObject[] tutPCObjs;
+    GameObject[] tutDroidObjs;
+    float waitTime = 0.0f;
+    int count = 0;
+
+    // PlayerPrefs
+    int playedOnce;
+
     // Use this for initialization
     void Start()
     {
@@ -70,6 +85,20 @@ public class Popup : MonoBehaviour {
         beScore = bestScore.GetComponent<Text>();
         _best = PlayerPrefs.GetInt("_best",_best);
         beScore.text = "" + _best;
+
+        // Tutorial
+        tutPCObjs = new GameObject[3];
+        tutPCObjs[0] = avoidObstaclePopup;
+        tutPCObjs[1] = WOncePopup;
+        tutPCObjs[2] = WTwicePopup;
+
+        tutDroidObjs = new GameObject[3];
+        tutDroidObjs[0] = avoidObstaclePopup;
+        tutDroidObjs[1] = tapOncePopup;
+        tutDroidObjs[2] = tapTwicePopup;
+
+        // PlayerPrefs
+        playedOnce = PlayerPrefs.GetInt("Played");
     }
 
     // Update is called once per frame
@@ -83,6 +112,29 @@ public class Popup : MonoBehaviour {
             Death();
             Time.timeScale = 0;
         }
+        Debug.Log(PlayerPrefs.GetInt("Played"));
+
+        if ((playedOnce == 0))
+        {
+
+            if (Time.time >= waitTime)
+            {
+                if (count > 2)
+                {
+                    tutDroidObjs[2].SetActive(false);
+                    tutPCObjs[2].SetActive(false);
+                    PlayerPrefs.SetInt("Played", 1);
+                    PlayerPrefs.Save();
+                }
+                else
+                {
+                    RunTutorial();
+                    waitTime = Time.time + 2.0f;
+                }
+
+            }
+        }
+
     }
 
     public void Pause()
@@ -154,6 +206,37 @@ public class Popup : MonoBehaviour {
         set
         {
             dead = value;
+        }
+    }
+
+    public void RunTutorial()
+    {
+        if (Application.platform == RuntimePlatform.WindowsEditor) {
+            if (count > 0)
+                tutPCObjs[count - 1].SetActive(false);
+            if (!tutPCObjs[count].activeSelf)
+                tutPCObjs[count].SetActive(true);
+            count++;
+        }
+
+
+        if (Application.platform == RuntimePlatform.WindowsPlayer)
+        {
+            if (count > 0)
+                tutPCObjs[count - 1].SetActive(false);
+            if (!tutPCObjs[count].activeSelf)
+                tutPCObjs[count].SetActive(true);
+            count++;
+        }
+
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            if (count > 0)
+                tutDroidObjs[count - 1].SetActive(false);
+            if (!tutDroidObjs[count].activeSelf)
+                tutDroidObjs[count].SetActive(true);
+            count++;
+          
         }
     }
 }
