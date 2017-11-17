@@ -19,7 +19,10 @@ public class LoadScene : MonoBehaviour {
     {
         SceneManager.LoadScene("Stage 1");
     }
-
+    public void LoadInstruction()
+    {
+        SceneManager.LoadScene("Instruction");
+    }
     public void ExitGame()
     {
         Application.Quit();

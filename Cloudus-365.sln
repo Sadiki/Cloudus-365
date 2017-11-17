@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2017
+# Visual Studio 2015
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cloudus-365", "Cloudus-365.csproj", "{4AC8E4EC-6B18-DF72-5570-8F8F68B78D61}"
 EndProject
 Global
