@@ -223,6 +223,19 @@ public class TouchInput : MonoBehaviour
             isJumping = value;
         }
     }
+
+    public float NumJumps
+    {
+        get
+        {
+            return numJumps;
+        }
+
+        set
+        {
+            numJumps = value;
+        }
+    }
 }
 
  

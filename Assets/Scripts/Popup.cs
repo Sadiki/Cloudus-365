@@ -45,6 +45,7 @@ public class Popup : MonoBehaviour {
     GameObject[] tutDroidObjs;
     float waitTime = 0.0f;
     int count = 0;
+    TouchInput touchInput;
 
     // PlayerPrefs
     int playedOnce;
@@ -99,6 +100,9 @@ public class Popup : MonoBehaviour {
         tutDroidObjs[1] = tapTwicePopup;
         tutDroidObjs[2] = avoidObstaclePopup;
 
+        GameObject player = GameObject.Find("Spaceman");
+        touchInput = player.GetComponent<TouchInput>();
+
         // PlayerPrefs
         playedOnce = PlayerPrefs.GetInt("Played");
     }
@@ -116,26 +120,16 @@ public class Popup : MonoBehaviour {
         }
         Debug.Log(PlayerPrefs.GetInt("Played"));
 
-       // if ((playedOnce == 0))
-       // {
+       if ((playedOnce == 0))
+        {
 
-            if (Time.time >= waitTime)
+            if (!(count > 2))
             {
-                if (count > 2)
-                {
-                    tutDroidObjs[2].SetActive(false);
-                    tutPCObjs[2].SetActive(false);
-                  //  PlayerPrefs.SetInt("Played", 1);
-                  //  PlayerPrefs.Save();
-                }
-                else
-                {
-                    RunTutorial();
-                    waitTime = Time.time + 2.0f;
-                }
-
+                RunTutorial();
+                  PlayerPrefs.SetInt("Played", 1);
+                  PlayerPrefs.Save();
             }
-       // }
+       }
 
     }
 
@@ -216,9 +210,37 @@ public class Popup : MonoBehaviour {
         if (Application.platform == RuntimePlatform.WindowsEditor) {
             if (count > 0)
                 tutPCObjs[count - 1].SetActive(false);
+
+            if (Input.GetKey(KeyCode.W) && count == 0)
+            {
+                count = 1;
+            }
+
+            if(Input.GetKey(KeyCode.W) && count == 1 && touchInput.NumJumps == 2)
+            {
+                count = 2;
+            }
+
             if (!tutPCObjs[count].activeSelf)
                 tutPCObjs[count].SetActive(true);
-            count++;
+
+            if ( count == 2)
+            {
+                if (Time.time >= waitTime)
+                {
+                    if (waitTime != 0)
+                    {
+                        tutDroidObjs[2].SetActive(false);
+                        tutPCObjs[2].SetActive(false);
+
+                        count = 3;
+                    }
+
+                    waitTime = Time.time + 2.0f;
+                }
+
+            }
+
         }
 
 
