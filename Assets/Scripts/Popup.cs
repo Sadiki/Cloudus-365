@@ -88,14 +88,16 @@ public class Popup : MonoBehaviour {
 
         // Tutorial
         tutPCObjs = new GameObject[3];
-        tutPCObjs[0] = avoidObstaclePopup;
-        tutPCObjs[1] = WOncePopup;
-        tutPCObjs[2] = WTwicePopup;
+
+        tutPCObjs[0] = WOncePopup;
+        tutPCObjs[1] = WTwicePopup;
+        tutPCObjs[2] = avoidObstaclePopup;
 
         tutDroidObjs = new GameObject[3];
-        tutDroidObjs[0] = avoidObstaclePopup;
-        tutDroidObjs[1] = tapOncePopup;
-        tutDroidObjs[2] = tapTwicePopup;
+
+        tutDroidObjs[0] = tapOncePopup;
+        tutDroidObjs[1] = tapTwicePopup;
+        tutDroidObjs[2] = avoidObstaclePopup;
 
         // PlayerPrefs
         playedOnce = PlayerPrefs.GetInt("Played");
@@ -114,8 +116,8 @@ public class Popup : MonoBehaviour {
         }
         Debug.Log(PlayerPrefs.GetInt("Played"));
 
-        if ((playedOnce == 0))
-        {
+       // if ((playedOnce == 0))
+       // {
 
             if (Time.time >= waitTime)
             {
@@ -123,8 +125,8 @@ public class Popup : MonoBehaviour {
                 {
                     tutDroidObjs[2].SetActive(false);
                     tutPCObjs[2].SetActive(false);
-                    PlayerPrefs.SetInt("Played", 1);
-                    PlayerPrefs.Save();
+                  //  PlayerPrefs.SetInt("Played", 1);
+                  //  PlayerPrefs.Save();
                 }
                 else
                 {
@@ -133,7 +135,7 @@ public class Popup : MonoBehaviour {
                 }
 
             }
-        }
+       // }
 
     }
 
