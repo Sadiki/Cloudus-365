@@ -21,7 +21,7 @@ public class TouchInput : MonoBehaviour
 
     Timer currTime;
 
-    float moveSpeed = 2;
+    float moveSpeed = 3;
 
     float waitTime;
 
@@ -49,7 +49,7 @@ public class TouchInput : MonoBehaviour
     {
 
         //Check currTime. If it is 150 then increase speed by 1. Increase speed by 1 at every 50
-        if(((int)currTime.time >= 150.0f) && ((int)currTime.time % 50 == 0) && moveSpeed <= 4)
+        if(((int)currTime.time >= 50.0f) && ((int)currTime.time % 50 == 0) && moveSpeed <= 5)
         {
             if (Time.time > waitTime)
             {

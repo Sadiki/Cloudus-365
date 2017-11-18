@@ -964,6 +964,7 @@ GameObject:
   - component: {fileID: 790717881}
   - component: {fileID: 790717880}
   - component: {fileID: 790717882}
+  - component: {fileID: 790717883}
   m_Layer: 0
   m_Name: Spaceman
   m_TagString: Player
@@ -1201,6 +1202,65 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!60 &790717883
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 790717873}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2.26, y: 2.96}
+    newSize: {x: 2.26, y: 2.96}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.69128907, y: -0.49734375}
+      - {x: 1.0428516, y: -0.45339844}
+      - {x: 1.1307422, y: -0.38748047}
+      - {x: 1.1307422, y: -0.29958984}
+      - {x: 1.0867969, y: -0.05789062}
+      - {x: 0.69128907, y: 0.16183594}
+      - {x: 0.5594531, y: 0.3815625}
+      - {x: 0.7132617, y: 0.46945313}
+      - {x: 0.9110156, y: 0.7550977}
+      - {x: 0.9329883, y: 0.9528516}
+      - {x: 0.889043, y: 1.2604687}
+      - {x: 0.49353516, y: 1.5021679}
+      - {x: 0.14197268, y: 1.5021679}
+      - {x: -0.033808574, y: 1.4582226}
+      - {x: -0.29748046, y: 1.1506054}
+      - {x: -0.3853711, y: 0.6012891}
+      - {x: -0.517207, y: 0.5573438}
+      - {x: -0.75890625, y: 0.35958984}
+      - {x: -0.9786328, y: 0.030000005}
+      - {x: -0.9786328, y: -0.25564453}
+      - {x: -0.8248242, y: -0.49734375}
+      - {x: -0.8687695, y: -0.4753711}
+      - {x: -1.1324414, y: -0.5193164}
+      - {x: -1.1324414, y: -1.1345508}
+      - {x: -0.8687695, y: -1.2224414}
+      - {x: -0.45128906, y: -1.0906055}
+      - {x: -0.23156248, y: -0.93679684}
+      - {x: -0.07775389, y: -0.8049609}
+      - {x: -0.14367186, y: -1.1125782}
+      - {x: 0.032109395, y: -1.442168}
+      - {x: 0.20789064, y: -1.4861133}
+      - {x: 0.49353516, y: -1.4861133}
+      - {x: 0.60339844, y: -1.3982227}
+      - {x: 0.5374805, y: -0.9587695}
+      - {x: 0.40564454, y: -0.49734375}
 --- !u!1 &809399243
 GameObject:
   m_ObjectHideFlags: 0
