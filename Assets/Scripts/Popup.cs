@@ -13,7 +13,13 @@ public class Popup : MonoBehaviour {
     public GameObject pausePopup;
 
     bool paused = false;
-    
+
+    public Button bgmButton;
+    public AudioSource bgm;
+
+    public Button sfxButton;
+    public AudioSource sfx;
+
     //death popup
     public Button playAgainButton;
     public Button deathExitButton;
@@ -64,6 +70,12 @@ public class Popup : MonoBehaviour {
         pauseExitButton.onClick.AddListener(ExitGame);
 
         pausePopup.SetActive(false);
+
+        Button bgmBtn = bgmButton.GetComponent<Button>();
+        bgmBtn.onClick.AddListener(delegate { bgmMute(bgm); });
+
+        Button sfxBtn = sfxButton.GetComponent<Button>();
+        sfxBtn.onClick.AddListener(delegate { sfxMute(sfx); });
 
         //death
         Button playAgainBtn = playAgainButton.GetComponent<Button>();
@@ -203,6 +215,16 @@ public class Popup : MonoBehaviour {
         {
             dead = value;
         }
+    }
+
+    void bgmMute(AudioSource source)
+    {
+        source.mute = !source.mute;
+    }
+
+    void sfxMute(AudioSource source)
+    {
+        source.mute = !source.mute;
     }
 
     public void RunTutorial()
