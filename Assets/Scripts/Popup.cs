@@ -14,6 +14,7 @@ public class Popup : MonoBehaviour {
 
     bool paused = false;
 
+    //sound
     public Button bgmButton;
     public AudioSource bgm;
 
@@ -71,11 +72,31 @@ public class Popup : MonoBehaviour {
 
         pausePopup.SetActive(false);
 
+        //sound
+
         Button bgmBtn = bgmButton.GetComponent<Button>();
-        bgmBtn.onClick.AddListener(delegate { bgmMute(bgm); });
+        bgmBtn.onClick.AddListener(delegate { BgmMute(bgm); });
 
         Button sfxBtn = sfxButton.GetComponent<Button>();
-        sfxBtn.onClick.AddListener(delegate { sfxMute(sfx); });
+        sfxBtn.onClick.AddListener(delegate { SfxMute(sfx); });
+
+        if (PlayerPrefs.GetInt("bgmOff") == 1)
+        {
+            bgm.volume = 1;
+        }
+        else
+        {
+            bgm.volume = 0;
+        }
+
+        if (PlayerPrefs.GetInt("sfxOff") == 1)
+        {
+            sfx.volume = 1;
+        }
+        else
+        {
+            sfx.volume = 0;
+        }
 
         //death
         Button playAgainBtn = playAgainButton.GetComponent<Button>();
@@ -121,7 +142,7 @@ public class Popup : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        dead = health.Over;        
+        dead = health.Over;
 
         if (Paused == false && Dead == false) {
             Time.timeScale = 1;
@@ -130,7 +151,6 @@ public class Popup : MonoBehaviour {
             Death();
             Time.timeScale = 0;
         }
-        Debug.Log(PlayerPrefs.GetInt("Played"));
 
        if ((playedOnce == 0))
         {
@@ -217,14 +237,30 @@ public class Popup : MonoBehaviour {
         }
     }
 
-    void bgmMute(AudioSource source)
+    void BgmMute(AudioSource source)
     {
-        source.mute = !source.mute;
+        if (PlayerPrefs.GetInt("bgmOff") == 1) {
+            source.volume = 0;
+            PlayerPrefs.SetInt("bgmOff", 0);
+        }
+        else {
+            source.volume = 1;
+            PlayerPrefs.SetInt("bgmOff", 1);
+        }
     }
 
-    void sfxMute(AudioSource source)
+    void SfxMute(AudioSource source)
     {
-        source.mute = !source.mute;
+        if (PlayerPrefs.GetInt("sfxOff") == 1)
+        {
+            source.volume = 0;
+            PlayerPrefs.SetInt("sfxOff", 0);
+        }
+        else
+        {
+            source.volume = 1;
+            PlayerPrefs.SetInt("sfxOff", 1);
+        }
     }
 
     public void RunTutorial()
