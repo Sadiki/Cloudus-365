@@ -25,6 +25,8 @@ public class TouchInput : MonoBehaviour
 
     float waitTime;
 
+    Animator playerAnimation;
+
     // Use this for initialization
     void Start()
     {
@@ -41,6 +43,9 @@ public class TouchInput : MonoBehaviour
         // Insantiate timer obj
         GameObject timer = GameObject.Find("timer");
         currTime = timer.GetComponent<Timer>();
+
+        // Player animation
+        playerAnimation = this.GetComponent<Animator>();
 
     }
 
@@ -138,7 +143,7 @@ public class TouchInput : MonoBehaviour
 
 
         // For testing through computer.
-        if (Input.GetKey(KeyCode.W) && IsJumping == false)
+        if (Input.GetKeyDown(KeyCode.W) && IsJumping == false)
         {
             if (!(pausePopup.Paused))
             {
@@ -186,6 +191,11 @@ public class TouchInput : MonoBehaviour
             if(!pausePopup.Dead)
                 pausePopup.Pause();
         }
+
+        if (isJumping)
+        {
+            playerAnimation.speed = 0;
+        }
     }
 
     // When the player has touched the floor then they are able to jump again.
@@ -195,6 +205,7 @@ public class TouchInput : MonoBehaviour
         {
             IsJumping = false;
             numJumps = 0;
+            playerAnimation.speed = 1.0f;
         }
     }
 
