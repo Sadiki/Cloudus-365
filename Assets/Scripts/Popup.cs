@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class Popup : MonoBehaviour {
+public class Popup : MonoBehaviour
+{
 
     //pause popup
     public Button pauseButton;
@@ -14,6 +15,7 @@ public class Popup : MonoBehaviour {
 
     bool paused = false;
 
+    //sound
     public Button bgmButton;
     public AudioSource bgm;
 
@@ -71,11 +73,31 @@ public class Popup : MonoBehaviour {
 
         pausePopup.SetActive(false);
 
+        //sound
+
         Button bgmBtn = bgmButton.GetComponent<Button>();
-        bgmBtn.onClick.AddListener(delegate { bgmMute(bgm); });
+        bgmBtn.onClick.AddListener(delegate { BgmMute(bgm); });
 
         Button sfxBtn = sfxButton.GetComponent<Button>();
-        sfxBtn.onClick.AddListener(delegate { sfxMute(sfx); });
+        sfxBtn.onClick.AddListener(delegate { SfxMute(sfx); });
+
+        if (PlayerPrefs.GetInt("bgmOff") == 1)
+        {
+            bgm.volume = 1;
+        }
+        else
+        {
+            bgm.volume = 0;
+        }
+
+        if (PlayerPrefs.GetInt("sfxOff") == 1)
+        {
+            sfx.volume = 1;
+        }
+        else
+        {
+            sfx.volume = 0;
+        }
 
         //death
         Button playAgainBtn = playAgainButton.GetComponent<Button>();
@@ -96,7 +118,7 @@ public class Popup : MonoBehaviour {
         curScore.text = "" + (int)score.time;
 
         beScore = bestScore.GetComponent<Text>();
-        _best = PlayerPrefs.GetInt("_best",_best);
+        _best = PlayerPrefs.GetInt("_best", _best);
         beScore.text = "" + _best;
 
         // Tutorial
@@ -120,34 +142,36 @@ public class Popup : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update () {
-        dead = health.Over;        
+    void Update()
+    {
+        dead = health.Over;
 
-        if (Paused == false && Dead == false) {
+        if (Paused == false && Dead == false)
+        {
             Time.timeScale = 1;
         }
-        else {
+        else
+        {
             Death();
             Time.timeScale = 0;
         }
-        Debug.Log(PlayerPrefs.GetInt("Played"));
 
-       if ((playedOnce == 0))
+        if ((playedOnce == 0))
         {
 
             if (!(count > 2))
             {
                 RunTutorial();
-                  PlayerPrefs.SetInt("Played", 1);
-                  PlayerPrefs.Save();
+                PlayerPrefs.SetInt("Played", 1);
+                PlayerPrefs.Save();
             }
-       }
+        }
 
     }
 
     public void Pause()
     {
-        if(pausePopup.activeSelf == false)
+        if (pausePopup.activeSelf == false)
         {
             pausePopup.SetActive(true);
             Paused = true;
@@ -171,7 +195,7 @@ public class Popup : MonoBehaviour {
     }
     void Continue()
     {
-        if(pausePopup.activeSelf == true)
+        if (pausePopup.activeSelf == true)
         {
             pausePopup.SetActive(false);
             Paused = false;
@@ -208,7 +232,8 @@ public class Popup : MonoBehaviour {
     }
     public bool Dead
     {
-        get{
+        get
+        {
             return dead;
         }
         set
@@ -217,19 +242,38 @@ public class Popup : MonoBehaviour {
         }
     }
 
-    void bgmMute(AudioSource source)
+    void BgmMute(AudioSource source)
     {
-        source.mute = !source.mute;
+        if (PlayerPrefs.GetInt("bgmOff") == 1)
+        {
+            source.volume = 0;
+            PlayerPrefs.SetInt("bgmOff", 0);
+        }
+        else
+        {
+            source.volume = 1;
+            PlayerPrefs.SetInt("bgmOff", 1);
+        }
     }
 
-    void sfxMute(AudioSource source)
+    void SfxMute(AudioSource source)
     {
-        source.mute = !source.mute;
+        if (PlayerPrefs.GetInt("sfxOff") == 1)
+        {
+            source.volume = 0;
+            PlayerPrefs.SetInt("sfxOff", 0);
+        }
+        else
+        {
+            source.volume = 1;
+            PlayerPrefs.SetInt("sfxOff", 1);
+        }
     }
 
     public void RunTutorial()
     {
-        if (Application.platform == RuntimePlatform.WindowsEditor) {
+        if (Application.platform == RuntimePlatform.WindowsEditor)
+        {
             if (count > 0)
                 tutPCObjs[count - 1].SetActive(false);
 
@@ -238,7 +282,7 @@ public class Popup : MonoBehaviour {
                 count = 1;
             }
 
-            if(Input.GetKey(KeyCode.W) && count == 1 && touchInput.NumJumps == 2)
+            if (Input.GetKey(KeyCode.W) && count == 1 && touchInput.NumJumps == 2)
             {
                 count = 2;
             }
@@ -246,7 +290,7 @@ public class Popup : MonoBehaviour {
             if (!tutPCObjs[count].activeSelf)
                 tutPCObjs[count].SetActive(true);
 
-            if ( count == 2)
+            if (count == 2)
             {
                 if (Time.time >= waitTime)
                 {
@@ -282,7 +326,7 @@ public class Popup : MonoBehaviour {
             if (!tutDroidObjs[count].activeSelf)
                 tutDroidObjs[count].SetActive(true);
             count++;
-          
+
         }
     }
 }
