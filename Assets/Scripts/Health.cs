@@ -83,8 +83,7 @@ public class Health : MonoBehaviour {
     void ChangedHealth()
     {
 
-         Vector2 newScale = new Vector2((healthbarMaxSize/maxHealth)* healthVar, healthBar.transform.localScale.y);
-        // Vector2 newScale = new Vector2(healthVar / maxHealth , healthBar.transform.localScale.y);
+        Vector2 newScale = new Vector2((healthbarMaxSize/maxHealth)* healthVar, healthBar.transform.localScale.y);
 
         healthBar.transform.localScale = newScale;
     }

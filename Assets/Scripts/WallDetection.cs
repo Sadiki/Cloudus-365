@@ -21,7 +21,7 @@ public class WallDetection : MonoBehaviour {
 	void Update () {
 
         playerScript = player.GetComponent<TouchInput>();
-        //playerDectected = Physics2D.OverlapArea(
+
         objDetected = Physics2D.OverlapBox(transform.position, new Vector2(GetComponent<Collider2D>().bounds.size.x + 2, GetComponent<Collider2D>().bounds.size.y + 2), transform.eulerAngles.z);
 
         if(objDetected.gameObject.name == "Spaceman")
@@ -43,7 +43,6 @@ public class WallDetection : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-       // print("collision with wall" + collision.name);
         playerScript.IsInPerimeter = false;
     }
 }
