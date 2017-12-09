@@ -83,7 +83,6 @@ public class bgGenerater : MonoBehaviour {
             }
             if (Random.value > placeRandom)   // random place or not
             {
-                print("Create OBJ");
                 //x = cos(a) * r;
                 //y = sin(a) * r;
                 Vector2 position = new Vector2(Mathf.Cos(currentAngle * Mathf.Deg2Rad) * 15, Mathf.Sin(currentAngle * Mathf.Deg2Rad) * 15);

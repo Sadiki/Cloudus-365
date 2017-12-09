@@ -128,26 +128,33 @@ public class obstacleGenerator : MonoBehaviour {
     }
     private void ResetSpownTime()
     {
-        if (timer > 1 || timer <= 100)
+        print("Timer: " + timer);
+        if (timer > 1 && timer <= 50)
         {
-            randomSpownTime = Random.Range(5, 7);
+            randomSpownTime = Random.Range(5, 8);
             nextSpownTime = timer + randomSpownTime;
-            //print("Generated Time " + nextSpownTime);
+            print("haha 1-50  Generated Time " + randomSpownTime);
         }
-        else if (timer > 100 || timer <= 200)
+        else if (timer > 50 && timer <= 100)
         {
-            randomSpownTime = Random.Range(4, 6);
+            randomSpownTime = Random.Range(4, 7);
             nextSpownTime = timer + randomSpownTime;
+            print("50-100  Generated Time " + randomSpownTime);
+
         }
-        else if (timer > 200 || timer <= 300)
+        else if (timer > 100 && timer <= 150)
         {
-            randomSpownTime = Random.Range(3, 5);
+            randomSpownTime = Random.Range(3, 6);
             nextSpownTime = timer + randomSpownTime;
+            print("100-150  Generated Time " + randomSpownTime);
+
         }
         else
         {
-            randomSpownTime = Random.Range(3, 5);
+            randomSpownTime = Random.Range(2, 4);
             nextSpownTime = timer + randomSpownTime;
+            print("150-     Generated Time " + randomSpownTime);
+
 
         }
     }
